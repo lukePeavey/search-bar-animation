@@ -24,9 +24,10 @@ const styles = theme => ({
     justifyContent: 'center',
     alignItems: 'center',
     maxHeight: 900,
-    width: 700,
+    width: 'calc(100% - 40px)',
+    maxWidth: 600,
     background: theme.palette.background.contentFrame,
-    padding: theme.spacing.unit * 8
+    padding: theme.spacing.unit * 4
   }
 })
 
@@ -46,11 +47,21 @@ class Index extends Component {
   }
 
   handleChange = e => {
-    const value = String(e.currentTarget.value)
+    const searchValue = String(e.currentTarget.value)
+    this.setState({searchValue})
+  }
+
+  handleSubmit = e => {
+    e.preventDefault()
     this.setState({
-      value,
-      results: value.length > 4 ? movies : [],
-      showingResults:  value.length > 4
+      results: movies,
+      showingResults: true
+    })
+  }
+  handleClear = e => {
+    this.setState({
+      results: [],
+      showingResults: false
     })
   }
 
@@ -63,6 +74,7 @@ class Index extends Component {
           <SearchBar
             {...this.state}
             handleClick={this.handleClick}
+            handleSubmit={this.handleSubmit}
             handleChange={this.handleChange}
             showingResults={this.state.showingResults}
           />
