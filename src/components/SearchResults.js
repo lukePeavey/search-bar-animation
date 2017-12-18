@@ -3,16 +3,24 @@ import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
 import NodeGroup from 'react-move/NodeGroup'
 import { easeExpOut } from 'd3-ease'
-import Card from '../components/Card'
-import { easeBackOut, easeBackInOut, easeCircleOut } from 'd3-ease';
+import MoveCard from '../components/MoveCard'
+import { easeBackOut, easeBackInOut, easeCubicOut } from 'd3-ease';
 import movies from '../movies'
 
 const styles = theme => ({
+  html: {
+    boxSizing: 'border-box',
+  },
+  '*, &::before, &::after': {
+    boxSizing: 'inherit'
+  },
   root: {
     flex: '0 0 0',
     width: '100%',
-    transition: 'all 500ms ease-out',
-    overflow: 'hidden'
+    alignSelf: 'stretch',
+    transition: 'all 200ms ease-out',
+    overflow: 'hidden',
+    paddingTop: 24
   },
   item: {
     margin: '16px 0'
@@ -27,31 +35,29 @@ class SearchResults extends Component {
       <div className={classes.root} style={{flexGrow: show ? 1 : 0}}>
         <NodeGroup
           data={results}
-          keyAccessor={(d, i) => `key-${i}`}
-
+          keyAccessor={(data, index) => `key-${index}`}
           start={() => ({
-            y: 300,
+            y:300,
             opacity: 0
           })}
-
           enter={(data, index) => ({
-            y: 0,
-            opacity: 1,
-            timing: { duration: 5999, ease: easeBackOut, delay: index * 100 }
+            y: [0],
+            opacity: [1],
+            timing: { duration: 500, ease: easeCubicOut, delay: 300 +  (90 * index) }
           })}
         >
-          {(nodes) =>
-            <div>
+          {(nodes) =>  (
+            <div style={{position: 'relative'}}>
               {nodes.map(({ key, state: { y, opacity }, data }) => (
                 <div
                   key={key}
                   className={classes.item}
                   style={{transform: `translateY(${y}px)`, opacity}}>
-                  <Card movie={data} />
+                  <MoveCard movie={data} />
                 </div>
               ))}
             </div>
-          }
+          )}
         </NodeGroup>
       </div>
     )

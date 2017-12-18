@@ -22,6 +22,11 @@ const styles = theme => ({
     body: {
       margin: 0,
     },
+    'button, input':  {
+      '&:focus': {
+        outline: 'none'
+      }
+    }
   },
 });
 

@@ -11,7 +11,7 @@ import { easeExpOut } from 'd3-ease'
 const styles = theme => ({
   root: {
     margin: 'auto 0',
-    transition: 'all 500ms ease-out'
+    transition: 'all 200ms ease-out'
   },
   searchBar: {
     position: 'relative',
@@ -25,7 +25,7 @@ const styles = theme => ({
   input: {
     ...baseStyles.input,
     flex: '1 0 0',
-    width: 572,
+    width: 'calc(100% - 80px)',
     paddingLeft: theme.spacing.unit * 2,
     fontSize: 24,
     fontWeight: 500,
@@ -44,20 +44,33 @@ const styles = theme => ({
 })
 
 class SearchBar extends Component {
+  state = {
+    containerWidth: 600
+  }
+
+  getContainerWidth() {
+    this.setState({containerWidth: this.node.parentElement.clientWidth - 64})
+  }
+
+
+  componentDidMount() {
+    this.getContainerWidth()
+    window.addEventListener('resize', this.getContainerWidth.bind(this))
+  }
 
   render() {
-    const { classes, showingResults, active, value, handleChange, handleClick } = this.props
+    const { classes, showingResults, active, value, handleChange, handleSubmit, handleClick } = this.props
     return (
-      <div className={classes.root} >
+      <div className={classes.root} ref={(node) => {this.node = node}}>
       <Animate
         start={() => ({
-          width: [active ? 572 : 64],
+          width: [active ? this.state.containerWidth: 64],
           rotate: [active ? 0 : 135],
           opacity: [active ? 1 : 0],
           rad: [active ? 8 : 32]
         })}
         update={() => ({
-          width: [active ? 572 : 64],
+          width: [active ? this.state.containerWidth : 64],
           rotate: [active ? 0 : 135],
           opacity: [active ? 1 : 0],
 
@@ -66,7 +79,8 @@ class SearchBar extends Component {
         })}
       >
         {state => (
-          <div
+          <form
+            onSubmit={handleSubmit}
             className={classes.searchBar}
             style={{ width: state.width, borderRadius: state.rad + 'px'}}>
               <input
@@ -84,7 +98,7 @@ class SearchBar extends Component {
               >
                 <CloseIcon />
               </IconButton>
-          </div>
+          </form>
         )}
       </Animate>
       </div>
