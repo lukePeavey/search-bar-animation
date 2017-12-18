@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "classnames": "^2.2.5",
     "d3-ease": "^1.0.3",
     "jss": "latest",
     "jss-preset-default": "latest",
