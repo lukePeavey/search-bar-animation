@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { withStyles } from 'material-ui/styles'
 import NodeGroup from 'react-move/NodeGroup'
 import { easeExpOut } from 'd3-ease'
-import MoveCard from '../components/MoveCard'
+import MovieCard from '../components/MovieCard'
 import { easeBackOut, easeBackInOut, easeCubicOut } from 'd3-ease';
 import movies from '../movies'
 
