@@ -27,7 +27,7 @@ const styles = theme => ({
     flex: '1 0 0',
     width: 'calc(100% - 80px)',
     paddingLeft: theme.spacing.unit * 2,
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: 500,
     color: theme.palette.text.secondary,
     '&::placeholder': {
@@ -39,7 +39,7 @@ const styles = theme => ({
     top: theme.spacing.unit * 1,
     right: theme.spacing.unit * 1,
     fontSize: 32,
-    color: theme.palette.primary[500]
+    color: theme.palette.primary[600]
   }
 })
 
@@ -49,7 +49,8 @@ class SearchBar extends Component {
   }
 
   getContainerWidth() {
-    this.setState({containerWidth: this.node.parentElement.clientWidth - 64})
+    const padding =
+    this.setState({containerWidth: this.node.parentElement.clientWidth - 32})
   }
 
 
@@ -73,7 +74,6 @@ class SearchBar extends Component {
           width: [active ? this.state.containerWidth : 64],
           rotate: [active ? 0 : 135],
           opacity: [active ? 1 : 0],
-
           rad: [active ? 8 : 32],
           timing: { duration: 700, ease: easeExpOut }
         })}

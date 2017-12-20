@@ -8,17 +8,23 @@ import StarIcon from 'material-ui-icons/Star'
 import AddIcon from 'material-ui-icons/Add'
 import CheckIcon from 'material-ui-icons/Check'
 import Fade from './Fade'
-import { yellow, grey, lightBlue } from 'material-ui/colors'
+import { yellow, grey } from 'material-ui/colors'
 import classNames from 'classnames'
 
 const styles = theme => ({
   root: {
+    fontSize: 12,
     display: 'flex',
     width: '100%',
-    height: 140,
+    height: 90,
     border: 'solid 1px transparent',
     borderRadius: 8,
-    overflow: 'hidden'
+    overflow: 'hidden',
+    boxShadow: 'none',
+    [theme.breakpoints.up('sm')]: {
+      fontSize: 14,
+      height: 130,
+    }
   },
   cardHeader: {
     marginBottom: 'auto'
@@ -36,9 +42,13 @@ const styles = theme => ({
     height: '100%'
   },
   cover: {
-    width: 170,
+    width: 130,
     height: 'inherit',
-    filter: 'grayscale(70%)'
+    filter: 'grayscale(70%)',
+    backgroundPosition: 'top center',
+    [theme.breakpoints.up('sm')]: {
+      width: 170,
+    }
   },
   saveButton: {
     position: 'relative',
@@ -50,16 +60,20 @@ const styles = theme => ({
     top: 0,
     right: 0,
     bottom: 0,
-    width: 64,
+    width: 40,
     margin: 0,
     border: 'inherit',
     borderRadius: '0 8px 8px 0',
     backgroundColor: 'rgba(0,0,0,0)',
-    color: lightBlue[500],
-    transition: 'all 100ms',
-    '&:hover, &:active': {
+    color: theme.palette.primary[600],
+    transition: 'all 240ms',
+    cursor: 'pointer',
+    '&:hover': {
       color: '#fff',
-      backgroundColor: lightBlue[500]
+      backgroundColor: theme.palette.primary[600]
+    },
+    [theme.breakpoints.up('sm')]: {
+      width: 64,
     }
   },
   saveIcon: {

@@ -3,14 +3,23 @@
 import { create, SheetsRegistry } from 'jss';
 import preset from 'jss-preset-default';
 import { createMuiTheme } from 'material-ui/styles';
-import { blue, pink } from 'material-ui/colors';
+import { lightBlue, pink } from 'material-ui/colors';
 import createGenerateClassName from 'material-ui/styles/createGenerateClassName';
 
 const theme = createMuiTheme({
   palette: {
-    primary: blue,
+    primary: lightBlue,
     secondary: pink,
+    text: {
+      secondary: "rgba(0, 0, 0, 0.45)"
+    }
   },
+  typography: {
+    headline: {
+      fontSize: '1.2rem',
+      fontWeight: 400,
+    }
+  }
 });
 
 // Configure JSS

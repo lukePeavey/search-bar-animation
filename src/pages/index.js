@@ -14,7 +14,6 @@ const styles = theme => ({
     height: '100vh',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 24,
     background: '#f9f9f9'
   },
   contentFrame: {
@@ -23,11 +22,15 @@ const styles = theme => ({
     flex: '1 0 0',
     justifyContent: 'center',
     alignItems: 'center',
-    maxHeight: 900,
-    width: 'calc(100% - 40px)',
-    maxWidth: 600,
+    width: '100%',
     background: theme.palette.background.contentFrame,
-    padding: theme.spacing.unit * 4
+    padding: theme.spacing.unit * 2,
+    [theme.breakpoints.up('sm')]: {
+      width: 'calc(100% - 40px)',
+      maxWidth: 520,
+      margin: 40,
+      padding: theme.spacing.unit * 4,
+    }
   }
 })
 

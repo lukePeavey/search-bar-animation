@@ -4,7 +4,7 @@ import { withStyles } from 'material-ui/styles'
 import NodeGroup from 'react-move/NodeGroup'
 import { easeExpOut } from 'd3-ease'
 import MovieCard from '../components/MovieCard'
-import { easeBackOut, easeBackInOut, easeCubicOut } from 'd3-ease';
+import { easeBackOut, easeBackInOut, easeCubicOut, easeQuadOut} from 'd3-ease';
 import movies from '../movies'
 
 const styles = theme => ({
@@ -18,7 +18,7 @@ const styles = theme => ({
     flex: '0 0 0',
     width: '100%',
     alignSelf: 'stretch',
-    transition: 'all 200ms ease-out',
+    transition: 'all 150ms ease-out',
     overflow: 'hidden',
     paddingTop: 24
   },
@@ -43,7 +43,7 @@ class SearchResults extends Component {
           enter={(data, index) => ({
             y: [0],
             opacity: [1],
-            timing: { duration: 500, ease: easeCubicOut, delay: 300 +  (90 * index) }
+            timing: { duration: 450, ease: easeQuadOut, delay: 150 +  (80 * index) }
           })}
         >
           {(nodes) =>  (
@@ -53,7 +53,7 @@ class SearchResults extends Component {
                   key={key}
                   className={classes.item}
                   style={{transform: `translateY(${y}px)`, opacity}}>
-                  <MoveCard movie={data} />
+                  <MovieCard movie={data} />
                 </div>
               ))}
             </div>
