@@ -49,7 +49,9 @@ class SearchBar extends Component {
   }
 
   getContainerWidth() {
-    this.setState({ containerWidth: this.elem.parentElement.offsetWidth })
+    if (this.elem && this.elem.parentElement) {
+      this.setState({ containerWidth: this.elem.parentElement.offsetWidth })
+    }
   }
 
   componentDidMount() {

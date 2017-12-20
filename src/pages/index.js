@@ -46,7 +46,9 @@ class Index extends Component {
 
   handleClick = e => {
     if (!this.state.active) {
-      this.searchBar.input.focus()
+      if (this.searchBar && this.searchBar.input) {
+        this.searchBar.input.focus()
+      }
       this.setState({active: true, value: ''})
     } else {
       this.setState({results: [], value: ''})
