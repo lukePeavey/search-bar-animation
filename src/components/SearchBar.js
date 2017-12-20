@@ -20,7 +20,7 @@ const styles = theme => ({
     height: 64,
     width: 64,
     background: '#fff',
-    overflow: 'hidden',
+    overflow: 'hidden'
   },
   input: {
     ...baseStyles.input,
@@ -39,7 +39,7 @@ const styles = theme => ({
     top: theme.spacing.unit * 1,
     right: theme.spacing.unit * 1,
     fontSize: 32,
-    color: theme.palette.primary[600]
+    color: theme.palette.primary[500]
   }
 })
 
@@ -49,46 +49,56 @@ class SearchBar extends Component {
   }
 
   getContainerWidth() {
-    const padding =
-    this.setState({containerWidth: this.node.parentElement.clientWidth - 32})
+    this.setState({ containerWidth: this.elem.parentElement.offsetWidth })
   }
-
 
   componentDidMount() {
     this.getContainerWidth()
     window.addEventListener('resize', this.getContainerWidth.bind(this))
+    this.props.searchBarRef(this)
   }
 
   render() {
-    const { classes, showingResults, active, value, handleChange, handleSubmit, handleClick } = this.props
+    const {
+      classes,
+      showingResults,
+      active,
+      value,
+      handleChange,
+      handleSubmit,
+      handleClick,
+      searchBarRef
+    } = this.props
     return (
-      <div className={classes.root} ref={(node) => {this.node = node}}>
-      <Animate
-        start={() => ({
-          width: [active ? this.state.containerWidth: 64],
-          rotate: [active ? 0 : 135],
-          opacity: [active ? 1 : 0],
-          rad: [active ? 8 : 32]
-        })}
-        update={() => ({
-          width: [active ? this.state.containerWidth : 64],
-          rotate: [active ? 0 : 135],
-          opacity: [active ? 1 : 0],
-          rad: [active ? 8 : 32],
-          timing: { duration: 700, ease: easeExpOut }
-        })}
-      >
-        {state => (
-          <form
-            onSubmit={handleSubmit}
-            className={classes.searchBar}
-            style={{ width: state.width, borderRadius: state.rad + 'px'}}>
+      <div className={classes.root} ref={elem => (this.elem = elem)}>
+        <Animate
+          start={() => ({
+            width: [active ? this.state.containerWidth : 64],
+            rotate: [active ? 0 : 135],
+            opacity: [active ? 1 : 0],
+            rad: [active ? 8 : 32]
+          })}
+          update={() => ({
+            width: [active ? this.state.containerWidth : 64],
+            rotate: [active ? 0 : 135],
+            opacity: [active ? 1 : 0],
+            rad: [active ? 8 : 32],
+            timing: { duration: 700, ease: easeExpOut }
+          })}
+        >
+          {state => (
+            <form
+              onSubmit={handleSubmit}
+              className={classes.searchBar}
+              style={{ width: state.width, borderRadius: state.rad + 'px' }}
+            >
               <input
                 className={classes.input}
                 placeholder="Search"
                 style={{ opacity: state.opacity }}
-                value={state.value}
+                value={value}
                 onChange={handleChange}
+                ref={input => (this.input = input)}
               />
               <IconButton
                 className={classes.button}
@@ -98,9 +108,9 @@ class SearchBar extends Component {
               >
                 <CloseIcon />
               </IconButton>
-          </form>
-        )}
-      </Animate>
+            </form>
+          )}
+        </Animate>
       </div>
     )
   }

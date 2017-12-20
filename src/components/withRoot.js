@@ -14,7 +14,11 @@ const styles = theme => ({
       boxSizing: 'border-box',
       fontFamily: 'Proxima Nova',
       fontSize: 16,
-
+    },
+    [theme.breakpoints.down('sm')]: {
+      html: {
+        fontSize: 15
+      }
     },
     '*, *::before, *::after': {
       boxSizing: 'inherit'
@@ -25,7 +29,8 @@ const styles = theme => ({
     'button, input':  {
       '&:focus': {
         outline: 'none'
-      }
+      },
+      WebkitTapHighlightColor: "transparent"
     }
   },
 });

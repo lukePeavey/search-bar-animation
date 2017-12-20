@@ -17,41 +17,45 @@ const styles = theme => ({
     background: '#f9f9f9'
   },
   contentFrame: {
-    display: 'flex',
-    flexDirection: 'column',
     flex: '1 0 0',
-    justifyContent: 'center',
-    alignItems: 'center',
     width: '100%',
     background: theme.palette.background.contentFrame,
-    padding: theme.spacing.unit * 2,
+    padding: `${theme.spacing.unit * 4}px ${theme.spacing.unit * 2}px`,
     [theme.breakpoints.up('sm')]: {
-      width: 'calc(100% - 40px)',
-      maxWidth: 520,
-      margin: 40,
+      margin: '40px auto',
+      maxWidth: 544,
       padding: theme.spacing.unit * 4,
     }
+  },
+  content: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })
 
 class Index extends Component {
   state = {
-    searchValue: '',
+    value: '',
     active: false,
     results: [],
     showingResults: false
   }
 
   handleClick = e => {
-    this.setState(prevState => ({
-      active: !prevState.active,
-      value: ''
-    }))
+    if (!this.state.active) {
+      this.searchBar.input.focus()
+      this.setState({active: true, value: ''})
+    } else {
+      this.setState({results: [], value: ''})
+    }
   }
 
   handleChange = e => {
-    const searchValue = String(e.currentTarget.value)
-    this.setState({searchValue})
+    const value = String(e.currentTarget.value)
+    this.setState({ value })
   }
 
   handleSubmit = e => {
@@ -70,18 +74,21 @@ class Index extends Component {
 
   render() {
     const { classes } = this.props
-    const {showingResults} = this.state
+    const { showingResults } = this.state
     return (
       <div className={this.props.classes.root}>
         <div className={classes.contentFrame}>
-          <SearchBar
-            {...this.state}
-            handleClick={this.handleClick}
-            handleSubmit={this.handleSubmit}
-            handleChange={this.handleChange}
-            showingResults={this.state.showingResults}
-          />
-          <SearchResults results={this.state.results} show={showingResults}/>
+          <div className={classes.content}>
+            <SearchBar
+              {...this.state}
+              handleClick={this.handleClick}
+              handleSubmit={this.handleSubmit}
+              handleChange={this.handleChange}
+              showingResults={this.state.showingResults}
+              searchBarRef={comp => (this.searchBar = comp)}
+            />
+            <SearchResults results={this.state.results} show={showingResults} />
+          </div>
         </div>
       </div>
     )

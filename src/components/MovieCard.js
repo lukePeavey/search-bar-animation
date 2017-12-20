@@ -13,17 +13,15 @@ import classNames from 'classnames'
 
 const styles = theme => ({
   root: {
-    fontSize: 12,
     display: 'flex',
     width: '100%',
-    height: 90,
+    height: 112,
     border: 'solid 1px transparent',
     borderRadius: 8,
     overflow: 'hidden',
     boxShadow: 'none',
     [theme.breakpoints.up('sm')]: {
-      fontSize: 14,
-      height: 130,
+      height: 136
     }
   },
   cardHeader: {
@@ -47,7 +45,7 @@ const styles = theme => ({
     filter: 'grayscale(70%)',
     backgroundPosition: 'top center',
     [theme.breakpoints.up('sm')]: {
-      width: 170,
+      width: 170
     }
   },
   saveButton: {
@@ -60,21 +58,18 @@ const styles = theme => ({
     top: 0,
     right: 0,
     bottom: 0,
-    width: 40,
+    width: 56,
     margin: 0,
     border: 'inherit',
     borderRadius: '0 8px 8px 0',
     backgroundColor: 'rgba(0,0,0,0)',
     color: theme.palette.primary[600],
-    transition: 'all 240ms',
-    cursor: 'pointer',
-    '&:hover': {
-      color: '#fff',
-      backgroundColor: theme.palette.primary[600]
-    },
-    [theme.breakpoints.up('sm')]: {
-      width: 64,
-    }
+    transition: 'all 500ms',
+    cursor: 'pointer'
+  },
+  saved: {
+    backgroundColor: theme.palette.primary[600],
+    color: '#fff'
   },
   saveIcon: {
     position: 'absolute',
@@ -83,6 +78,12 @@ const styles = theme => ({
     width: 32,
     height: 32
   },
+  star: {
+    [theme.breakpoints.down('sm')]: {
+      width: 20,
+      height: 20
+    }
+  }
 })
 
 class MovieCard extends Component {

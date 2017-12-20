@@ -18,12 +18,12 @@ export default class Fade extends Component {
         start={{ opacity: 0 }}
         enter={{
           opacity: this.state.mounted ? [0, 1] : 1,
-          timing: { duration: 240,  delay: 210, ease: easeCircleInOut },
+          timing: { duration: 250, delay: 250, ease: easeCircleInOut },
           zIndex: 2
         }}
         leave={{
           opacity: [1, 0],
-          timing: { duration: 210, ease: easeCircleInOut },
+          timing: { duration: 250, ease: easeCircleInOut },
           zIndex: 1
         }}
       >
