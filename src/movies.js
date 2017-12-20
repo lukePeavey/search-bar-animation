@@ -1,12 +1,22 @@
 export default [
   {
-    title: 'The Suits',
-    subtitle: 'Drama, 2016',
-    image: '/images/suits.jpg'
+    title: 'Breaking Bad',
+    subtitle: 'Drama, 2008 - 2013',
+    image: '/images/breaking-bad.jpg'
   },
   {
-    title: 'Shameless',
+    title: 'True Detective',
     subtitle: 'Drama, 2007 - 2016',
-    image: '/images/shameless.jpg'
+    image: '/images/true-detective.jpg'
+  },
+  {
+    title: 'The Wire',
+    subtitle: 'Drama, 2002 - 2008',
+    image: '/images/the-wire.jpg'
+  },
+  {
+    title: 'The Sopranos',
+    subtitle: 'Drama, 2010 - 2013',
+    image: '/images/sopranos.jpg'
   }
 ]
